@@ -32,4 +32,9 @@ class ZappingTest {
     void testCanal63al5() {
         assertEquals(41, Zapping.clics(63, 5));
     }
+
+    @Test
+    void testCanal1al51() {
+        assertEquals(49, Zapping.clics(1, 51));
+    }
 }
