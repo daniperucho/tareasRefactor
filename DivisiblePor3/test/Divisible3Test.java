@@ -29,4 +29,10 @@ class Divisible3Test {
         assertEquals("Sí", Divisible3.esDivisible(11));
     }
 
+    @Test
+    void test6() {
+        assertEquals("Sí", Divisible3.esDivisible(9));
+    }
+
+
 }
