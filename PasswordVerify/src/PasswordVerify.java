@@ -1,3 +1,6 @@
+import java.util.EnumMap;
+import java.util.Enumeration;
+
 public class PasswordVerify {
 
     public static class PasswordResultado {
@@ -8,17 +11,31 @@ public class PasswordVerify {
     public static PasswordResultado valido(String password) {
         PasswordResultado r = new PasswordResultado();
 
-        if (password.length() < 8){
+        int cuentaNumeros = 0;
+        for (char c : password.toCharArray()) {
+            if (Character.isDigit(c)) cuentaNumeros++;
+        }
+        if (password.length() >= 8) {
+
             r.valido = false;
             r.errores =
-                    "La contrasenya ha de tenir almenys 8 caràcters\n" +
-                            "La contrasenya ha de contenir almenys 2 números\n" +
-                            "La contrasenya ha de contenir almenys una lletra majúscula\n" +
-                            "La contrasenya ha de contenir almenys un caràcter especial";
-        } else {
+                    "La contrasenya ha de contenir almenys 2 números" +
+                    "La contrasenya ha de contenir almenys una lletra majúscula" +
+                    "La contrasenya ha de contenir almenys un caràcter especial";
+
+        } else if (cuentaNumeros >= 2) {
+
             r.valido = false;
-            r.errores = "La contrasenya ha de contenir almenys 2 números\n" +
-                    "La contrasenya ha de contenir almenys una lletra majúscula\n" +
+            r.errores = "La contrasenya ha de tenir almenys 8 caràcters" +
+                    "La contrasenya ha de contenir almenys una lletra majúscula" +
+                    "La contrasenya ha de contenir almenys un caràcter especial";
+
+        } else {
+
+            r.valido = false;
+            r.errores = "La contrasenya ha de tenir almenys 8 caràcters" +
+                    "La contrasenya ha de contenir almenys 2 números" +
+                    "La contrasenya ha de contenir almenys una lletra majúscula" +
                     "La contrasenya ha de contenir almenys un caràcter especial";
         }
 

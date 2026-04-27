@@ -8,8 +8,10 @@ public class PasswordVerifyTest {
     public void testVacio() {
         PasswordVerify.PasswordResultado r = PasswordVerify.valido("");
         assertFalse(r.valido);
-        assertEquals("La contrasenya ha de tenir almenys 8 caràcters\n" + "La contrasenya ha de contenir almenys 2 números\n" +
-                "La contrasenya ha de contenir almenys una lletra majúscula\n" + "La contrasenya ha de contenir almenys un caràcter especial",
+        assertEquals("La contrasenya ha de tenir almenys 8 caràcters" +
+                        "La contrasenya ha de contenir almenys 2 números" +
+                        "La contrasenya ha de contenir almenys una lletra majúscula" +
+                        "La contrasenya ha de contenir almenys un caràcter especial",
                 r.errores);
     }
 
@@ -17,8 +19,10 @@ public class PasswordVerifyTest {
     public void testHola() {
         PasswordVerify.PasswordResultado r = PasswordVerify.valido("hola");
         assertFalse(r.valido);
-        assertEquals("La contrasenya ha de tenir almenys 8 caràcters\n" + "La contrasenya ha de contenir almenys 2 números\n" +
-                        "La contrasenya ha de contenir almenys una lletra majúscula\n" + "La contrasenya ha de contenir almenys un caràcter especial",
+        assertEquals("La contrasenya ha de tenir almenys 8 caràcters" +
+                        "La contrasenya ha de contenir almenys 2 números" +
+                        "La contrasenya ha de contenir almenys una lletra majúscula" +
+                        "La contrasenya ha de contenir almenys un caràcter especial",
                 r.errores);
     }
 
@@ -26,8 +30,19 @@ public class PasswordVerifyTest {
     public void testHolacaracola() {
         PasswordVerify.PasswordResultado r = PasswordVerify.valido("holacaracola");
         assertFalse(r.valido);
-        assertEquals("La contrasenya ha de contenir almenys 2 números\n" +
-                        "La contrasenya ha de contenir almenys una lletra majúscula\n" + "La contrasenya ha de contenir almenys un caràcter especial",
+        assertEquals("La contrasenya ha de contenir almenys 2 números" +
+                        "La contrasenya ha de contenir almenys una lletra majúscula" +
+                        "La contrasenya ha de contenir almenys un caràcter especial",
+                r.errores);
+    }
+
+    @Test
+    public void testHola12() {
+        PasswordVerify.PasswordResultado r = PasswordVerify.valido("hola12");
+        assertFalse(r.valido);
+        assertEquals("La contrasenya ha de tenir almenys 8 caràcters" +
+                        "La contrasenya ha de contenir almenys una lletra majúscula" +
+                        "La contrasenya ha de contenir almenys un caràcter especial",
                 r.errores);
     }
 
