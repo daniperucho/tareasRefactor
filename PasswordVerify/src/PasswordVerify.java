@@ -1,4 +1,3 @@
-
 public class PasswordVerify {
 
     public static class PasswordResultado {
