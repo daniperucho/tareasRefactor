@@ -95,4 +95,12 @@ public class PasswordVerifyTest {
         assertEquals("La contrasenya ha de contenir almenys una lletra majúscula" +
                         "La contrasenya ha de contenir almenys un caràcter especial", r.errores);
     }
+
+    @Test
+    public void testHolacaracolaExclamacion() {
+        PasswordVerify.PasswordResultado r = PasswordVerify.valido("holacaracola!");
+        assertFalse(r.valido);
+        assertEquals("La contrasenya ha de contenir almenys 2 números" +
+                "La contrasenya ha de contenir almenys una lletra majúscula", r.errores);
+    }
 }
