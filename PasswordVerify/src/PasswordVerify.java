@@ -5,7 +5,7 @@ public class PasswordVerify {
 
     public static class PasswordResultado {
         public boolean valido;
-        public String errores;
+        public String errores = "";
     }
 
     public static PasswordResultado valido(String password) {
@@ -15,37 +15,31 @@ public class PasswordVerify {
         for (char c : password.toCharArray()) {
             if (Character.isDigit(c)) cuentaNumeros++;
         }
-        if (password.length() >= 8) {
-
+        if (password.length() < 8) {
             r.valido = false;
-            r.errores =
-                    "La contrasenya ha de contenir almenys 2 números" +
-                    "La contrasenya ha de contenir almenys una lletra majúscula" +
-                    "La contrasenya ha de contenir almenys un caràcter especial";
+            r.errores += "La contrasenya ha de tenir almenys 8 caràcters";
+        }
 
-        } else if (cuentaNumeros >= 2) {
-
+        if (cuentaNumeros < 2) {
             r.valido = false;
-            r.errores = "La contrasenya ha de tenir almenys 8 caràcters" +
-                    "La contrasenya ha de contenir almenys una lletra majúscula" +
-                    "La contrasenya ha de contenir almenys un caràcter especial";
+            r.errores += "La contrasenya ha de contenir almenys 2 números";
+        }
 
-        } else if (password.matches(".*[A-Z].*")) {
+        if (!password.matches(".*[A-Z].*")) {
             r.valido = false;
-            r.errores = "La contrasenya ha de tenir almenys 8 caràcters" +
-                    "La contrasenya ha de contenir almenys 2 números" +
-                    "La contrasenya ha de contenir almenys un caràcter especial";
+            r.errores += "La contrasenya ha de contenir almenys una lletra majúscula";
+        }
+
+        if (!password.matches(".*[^a-zA-Z0-9].*")) {
+            r.valido = false;
+            r.errores += "La contrasenya ha de contenir almenys un caràcter especial";
+        }
 
 
-        } else {
 
-                r.valido = false;
-                r.errores = "La contrasenya ha de tenir almenys 8 caràcters" +
-                        "La contrasenya ha de contenir almenys 2 números" +
-                        "La contrasenya ha de contenir almenys una lletra majúscula" +
-                        "La contrasenya ha de contenir almenys un caràcter especial";
-            }
+
+
 
         return r;
-        }
+    }
 }
