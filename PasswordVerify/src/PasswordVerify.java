@@ -30,14 +30,21 @@ public class PasswordVerify {
                     "La contrasenya ha de contenir almenys una lletra majúscula" +
                     "La contrasenya ha de contenir almenys un caràcter especial";
 
-        } else {
-
+        } else if (password.matches(".*[A-Z].*")) {
             r.valido = false;
             r.errores = "La contrasenya ha de tenir almenys 8 caràcters" +
                     "La contrasenya ha de contenir almenys 2 números" +
-                    "La contrasenya ha de contenir almenys una lletra majúscula" +
                     "La contrasenya ha de contenir almenys un caràcter especial";
-        }
+
+
+        } else {
+
+                r.valido = false;
+                r.errores = "La contrasenya ha de tenir almenys 8 caràcters" +
+                        "La contrasenya ha de contenir almenys 2 números" +
+                        "La contrasenya ha de contenir almenys una lletra majúscula" +
+                        "La contrasenya ha de contenir almenys un caràcter especial";
+            }
 
         return r;
         }
