@@ -1,7 +1,7 @@
 public class PasswordVerify {
 
     public static class PasswordResultado {
-        public boolean valido;
+        public boolean valido = true;
         public String errores = "";
     }
 

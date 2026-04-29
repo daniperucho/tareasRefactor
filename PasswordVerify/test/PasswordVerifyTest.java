@@ -139,4 +139,11 @@ public class PasswordVerifyTest {
         assertFalse(r.valido);
         assertEquals("La contrasenya ha de contenir almenys un caràcter especial", r.errores);
     }
+
+    @Test
+    public void testHolacaracola12AExclamacion() {
+        PasswordVerify.PasswordResultado r = PasswordVerify.valido("holacaracola12A!");
+        assertTrue(r.valido);
+        assertEquals("", r.errores);
+    }
 }
