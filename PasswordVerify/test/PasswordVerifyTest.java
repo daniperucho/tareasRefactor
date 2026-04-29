@@ -146,4 +146,11 @@ public class PasswordVerifyTest {
         assertTrue(r.valido);
         assertEquals("", r.errores);
     }
+
+    @Test
+    public void testPablitoclavounclavito() {
+        PasswordVerify.PasswordResultado r = PasswordVerify.valido("#P4blit0cl4v0uncl4vit0#");
+        assertTrue(r.valido);
+        assertEquals("", r.errores);
+    }
 }
