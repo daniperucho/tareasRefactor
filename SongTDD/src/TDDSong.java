@@ -75,10 +75,11 @@ public class TDDSong {
             return resultado;
         }
 
-        // Frase especial del fly si el animal actual es fly o si fly está en anteriores
-        if (animal.equals("fly") || anteriores.contains("fly")) {
+        // Frase especial del fly solo si el animal actual es fly o si el animal anterior inmediato es fly
+        if (animal.equals("fly") || (!anteriores.isEmpty() && anteriores.get(anteriores.size() - 1).equals("fly"))) {
             resultado += fraseEspecial("fly");
         }
+
 
 
         // líneas "to catch the ..."
