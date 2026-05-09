@@ -1,97 +1,47 @@
 import java.util.List;
 
 public class TDDSong {
-    public String Song(List<String> animals){
 
-        if (animals.isEmpty())
-            return "";
+    public String Song(List<String> animals) {
 
-        if (animals.size() == 1 && animals.get(0).equals("fly")){
-            return "There was an old lady who swallowed a fly.\n" +
-                    "I don't know why she swallowed a fly - perhaps she'll die!\n";
+        if (animals.isEmpty()) return "";
+
+        String resultado = "";
+
+        for (int i = 0; i < animals.size(); i++) {
+            String animal = animals.get(i);
+            List<String> anteriores = animals.subList(0, i);
+
+            // estrofa i
+            resultado += estrofa(animal, anteriores, animals.get(0));
+
+            // línea en blanco entre estrofas (pero no después de la última)
+            if (i < animals.size() - 1) {
+                resultado += "\n";
+            }
         }
 
-        if (animals.size() == 1 && animals.get(0).equals("spider")) {
-            return "There was an old lady who swallowed a spider.\n" +
-                    "I don't know why she swallowed a spider - perhaps she'll die!\n";
-        }
+        return resultado;
+    }
 
-        if (animals.size() == 2 && animals.get(0).equals("fly") && animals.get(1).equals("spider")){
-            return "There was an old lady who swallowed a fly.\n" +
-                    "I don't know why she swallowed a fly - perhaps she'll die!\n" +
-                    "\n" +
-                    "There was an old lady who swallowed a spider;\n" +
-                    "That wriggled and wiggled and tickled inside her.\n" +
-                    "She swallowed the spider to catch the fly;\n" +
-                    "I don't know why she swallowed a fly - perhaps she'll die!\n";
-        }
-
-        if (animals.size() == 2 && animals.get(0).equals("spider") && animals.get(1).equals("fly")) {
-            return "There was an old lady who swallowed a spider.\n" +
-                    "I don't know why she swallowed a spider - perhaps she'll die!\n" +
-                    "\n" +
-                    "There was an old lady who swallowed a fly;\n" +
-                    "That wriggled and wiggled and tickled inside her.\n" +
-                    "She swallowed the fly to catch the spider;\n" +
-                    "I don't know why she swallowed a spider - perhaps she'll die!\n";
-        }
-
-        if (animals.size() == 3 && animals.get(0).equals("fly") && animals.get(1).equals("spider") && animals.get(2).equals("bird")) {
-            return "There was an old lady who swallowed a fly.\n" +
-                    "I don't know why she swallowed a fly - perhaps she'll die!\n" +
-                    "\n" +
-                    "There was an old lady who swallowed a spider;\n" +
-                    "That wriggled and wiggled and tickled inside her.\n" +
-                    "She swallowed the spider to catch the fly;\n" +
-                    "I don't know why she swallowed a fly - perhaps she'll die!\n" +
-                    "\n" +
-                    "There was an old lady who swallowed a bird;\n" +
-                    "How absurd to swallow a bird.\n" +
-                    "She swallowed the bird to catch the spider,\n" +
-                    "She swallowed the spider to catch the fly;\n" +
-                    "I don't know why she swallowed a fly - perhaps she'll die!\n" +
-                    "\n";
-        }
-
-        if (animals.size() == 3 && animals.get(0).equals("bird") && animals.get(1).equals("fly") && animals.get(2).equals("spider")) {
-            return "There was an old lady who swallowed a bird.\n" +
-                    "I don't know why she swallowed a bird - perhaps she'll die!\n" +
-                    "\n" +
-                    "There was an old lady who swallowed a fly;\n" +
-                    "That wriggled and wiggled and tickled inside her.\n" +
-                    "She swallowed the fly to catch the bird;\n" +
-                    "I don't know why she swallowed a bird - perhaps she'll die!\n" +
-                    "\n" +
-                    "There was an old lady who swallowed a spider;\n" +
-                    "How absurd to swallow a spider.\n" +
-                    "She swallowed the spider to catch the fly,\n" +
-                    "She swallowed the fly to catch the bird;\n" +
-                    "I don't know why she swallowed a bird - perhaps she'll die!\n" +
-                    "\n";
+    // frase especial según animal
+    private String fraseEspecial(String animal) {
+        if (animal.equals("fly")) {
+            return "That wriggled and wiggled and tickled inside her.\n";
         }
         return "";
     }
 
-    //metodo para sacar la frase diferente según el animal indicado
-    private String fraseEspecial(String animal) {
-        if (animal.equals("spider")) {
-            return "That wriggled and wiggled and tickled inside her.";
-        }
-        if (animal.equals("bird")) {
-            return "How absurd to swallow a bird.";
-        }
 
-        return "I don't know why she swallowed a " + animal + " - perhaps she'll die!";
-    }
 
-    //metodo para la línea inicial común
+    // línea inicial común (sin punto ni ; todavía)
     private String fraseInicial(String animal) {
-        return "There was an old lady who swallowed a " + animal + ".\n";
+        return "There was an old lady who swallowed a " + animal;
     }
 
-    //metodo para la linea final comun
-    private String fraseFinal() {
-        return "I don't know why she swallowed a fly - perhaps she'll die!\n";
+    // línea final común: usa el PRIMER animal de la canción
+    private String fraseFinal(String primerAnimal) {
+        return "I don't know why she swallowed a " + primerAnimal + " - perhaps she'll die!\n";
     }
 
     private String lineasCatch(String animal, List<String> anteriores) {
@@ -100,29 +50,42 @@ public class TDDSong {
         if (anteriores.size() == 1) {
             resultado += "She swallowed the " + animal + " to catch the " + anteriores.get(0) + ";\n";
         }
+
         if (anteriores.size() == 2) {
-            resultado += "She swallowed the " + animal + " to catch the " + anteriores.get(1) + ";\n";
+            resultado += "She swallowed the " + animal + " to catch the " + anteriores.get(1) + ",\n";
             resultado += "She swallowed the " + anteriores.get(1) + " to catch the " + anteriores.get(0) + ";\n";
         }
+
         return resultado;
     }
 
-    private String estrofa(String animal, List<String> anteriores) {
+    private String estrofa(String animal, List<String> anteriores, String primerAnimal) {
         String resultado = "";
 
-        //inicio cacanción
-        resultado += fraseInicial(animal);
+        // línea inicial: punto en la primera estrofa, ; en las demás
+        if (anteriores.isEmpty()) {
+            resultado += fraseInicial(animal) + ".\n";
+        } else {
+            resultado += fraseInicial(animal) + ";\n";
+        }
 
-        //linea especial
-        resultado += fraseEspecial(animal);
+        // primera estrofa → solo línea final
+        if (anteriores.isEmpty()) {
+            resultado += fraseFinal(primerAnimal);
+            return resultado;
+        }
 
-        //linea to catch the
+        // Frase especial del fly si el animal actual es fly o si fly está en anteriores
+        if (animal.equals("fly") || anteriores.contains("fly")) {
+            resultado += fraseEspecial("fly");
+        }
+
+
+        // líneas "to catch the ..."
         resultado += lineasCatch(animal, anteriores);
 
-        //final canción
-        if (!anteriores.isEmpty()){
-            resultado += fraseFinal();
-        }
+        // línea final
+        resultado += fraseFinal(primerAnimal);
 
         return resultado;
     }
