@@ -36,4 +36,16 @@ class TDDSongTest {
                 "She swallowed the spider to catch the fly;\n" +
                 "I don't know why she swallowed a fly - perhaps she'll die!\n", s.Song(List.of("fly", "spider")));
     }
+
+    @Test
+    public void testSpiderFly() {
+        TDDSong s = new TDDSong();
+        assertEquals("There was an old lady who swallowed a spider.\n" +
+                "I don't know why she swallowed a spider - perhaps she'll die!\n" +
+                "\n" +
+                "There was an old lady who swallowed a fly;\n" +
+                "That wriggled and wiggled and tickled inside her.\n" +
+                "She swallowed the fly to catch the spider;\n" +
+                "I don't know why she swallowed a spider - perhaps she'll die!\n", s.Song(List.of("spider", "fly")));
+    }
 }
