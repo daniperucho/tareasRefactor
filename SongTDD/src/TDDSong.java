@@ -12,7 +12,7 @@ public class TDDSong {
             String animal = animals.get(i);
             List<String> anteriores = animals.subList(0, i);
 
-            resultado += estrofa(animal, anteriores, animals.get(0));
+            resultado += estrofa(animal, anteriores, animals.getFirst());
 
             if (i < animals.size() - 1) {
                 resultado += "\n";
@@ -48,7 +48,7 @@ public class TDDSong {
         String resultado = "";
 
         if (anteriores.size() == 1) {
-            resultado += "She swallowed the " + animal + " to catch the " + anteriores.get(0) + ".\n";
+            resultado += "She swallowed the " + animal + " to catch the " + anteriores.getFirst() + ".\n";
         }
 
         if (anteriores.size() == 2) {
