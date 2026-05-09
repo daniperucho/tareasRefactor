@@ -4,7 +4,7 @@ public class TDDSong {
     public String Song(List<String> animals){
 
         if (animals.isEmpty())
-        return "";
+            return "";
 
         if (animals.size() == 1 && animals.get(0).equals("fly")){
             return "There was an old lady who swallowed a fly.\n" +
@@ -69,7 +69,7 @@ public class TDDSong {
                     "I don't know why she swallowed a bird - perhaps she'll die!\n" +
                     "\n";
         }
-            return "";
+        return "";
     }
 
     //metodo para sacar la frase diferente según el animal indicado
@@ -86,11 +86,24 @@ public class TDDSong {
 
     //metodo para la línea inicial común
     private String fraseInicial(String animal) {
-        return "There was an old lady who swallowed a " + animal + ".\n"
+        return "There was an old lady who swallowed a " + animal + ".\n";
     }
 
     //metodo para la linea final comun
     private String fraseFinal() {
         return "I don't know why she swallowed a fly - perhaps she'll die!\n";
+    }
+
+    private String lineasCatch(String animal, List<String> anteriores) {
+        String resultado = "";
+
+        if (anteriores.size() == 1) {
+            resultado += "She swallowed the " + animal + " to catch the " + anteriores.get(0) + ";\n";
+        }
+        if (anteriores.size() == 2) {
+            resultado += "She swallowed the " + animal + " to catch the " + anteriores.get(1) + ";\n";
+            resultado += "She swallowed the " + anteriores.get(1) + " to catch the " + anteriores.get(0) + ";\n";
+        }
+        return resultado;
     }
 }
