@@ -106,4 +106,24 @@ public class TDDSong {
         }
         return resultado;
     }
+
+    private String estrofa(String animal, List<String> anteriores) {
+        String resultado = "";
+
+        //inicio cacanción
+        resultado += fraseInicial(animal);
+
+        //linea especial
+        resultado += fraseEspecial(animal);
+
+        //linea to catch the
+        resultado += lineasCatch(animal, anteriores);
+
+        //final canción
+        if (!anteriores.isEmpty()){
+            resultado += fraseFinal();
+        }
+
+        return resultado;
+    }
 }
