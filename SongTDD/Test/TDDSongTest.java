@@ -11,4 +11,10 @@ class TDDSongTest {
         assertEquals("", s.Song(List.of()));
     }
 
+    @Test
+    public void testFly(){
+        TDDSong s = new TDDSong();
+        assertEquals("There was an old lady who swallowed a fly.\n" +
+                "I don't know why she swallowed a fly - perhaps she'll die!\n", s.Song(List.of("fly")));
+    }
 }
