@@ -12,10 +12,8 @@ public class TDDSong {
             String animal = animals.get(i);
             List<String> anteriores = animals.subList(0, i);
 
-            // estrofa i
             resultado += estrofa(animal, anteriores, animals.get(0));
 
-            // línea en blanco entre estrofas (pero no después de la última)
             if (i < animals.size() - 1) {
                 resultado += "\n";
             }
@@ -24,22 +22,20 @@ public class TDDSong {
         return resultado;
     }
 
-    // frase especial según animal
     private String fraseEspecial(String animal) {
         if (animal.equals("fly")) {
             return "That wriggled and wiggled and tickled inside her.\n";
         }
+        if (animal.equals("bird")) {
+            return "How absurd to swallow a bird.\n";
+        }
         return "";
     }
 
-
-
-    // línea inicial común (sin punto ni ; todavía)
     private String fraseInicial(String animal) {
         return "There was an old lady who swallowed a " + animal;
     }
 
-    // línea final común: usa el PRIMER animal de la canción
     private String fraseFinal(String primerAnimal) {
         return "I don't know why she swallowed a " + primerAnimal + " - perhaps she'll die!\n";
     }
@@ -48,12 +44,12 @@ public class TDDSong {
         String resultado = "";
 
         if (anteriores.size() == 1) {
-            resultado += "She swallowed the " + animal + " to catch the " + anteriores.get(0) + ";\n";
+            resultado += "She swallowed the " + animal + " to catch the " + anteriores.get(0) + ".\n";
         }
 
         if (anteriores.size() == 2) {
             resultado += "She swallowed the " + animal + " to catch the " + anteriores.get(1) + ",\n";
-            resultado += "She swallowed the " + anteriores.get(1) + " to catch the " + anteriores.get(0) + ";\n";
+            resultado += "She swallowed the " + anteriores.get(1) + " to catch the " + anteriores.get(0) + ".\n";
         }
 
         return resultado;
@@ -62,30 +58,33 @@ public class TDDSong {
     private String estrofa(String animal, List<String> anteriores, String primerAnimal) {
         String resultado = "";
 
-        // línea inicial: punto en la primera estrofa, ; en las demás
+        // Línea inicial
         if (anteriores.isEmpty()) {
             resultado += fraseInicial(animal) + ".\n";
         } else {
-            resultado += fraseInicial(animal) + ";\n";
+            resultado += fraseInicial(animal) + ".\n";
         }
 
-        // primera estrofa → solo línea final
+        // Primera estrofa
         if (anteriores.isEmpty()) {
             resultado += fraseFinal(primerAnimal);
             return resultado;
         }
 
-        // Frase especial del fly solo si el animal actual es fly o si el animal anterior inmediato es fly
-        if (animal.equals("fly") || (!anteriores.isEmpty() && anteriores.get(anteriores.size() - 1).equals("fly"))) {
+        // Frase especial del animal actual (solo fly o bird)
+        if (animal.equals("fly") || animal.equals("bird")) {
+            resultado += fraseEspecial(animal);
+        }
+
+        // Frase especial del fly si el anterior inmediato es fly
+        if (!anteriores.isEmpty() && anteriores.get(anteriores.size() - 1).equals("fly") && !animal.equals("fly")) {
             resultado += fraseEspecial("fly");
         }
 
-
-
-        // líneas "to catch the ..."
+        // Catch
         resultado += lineasCatch(animal, anteriores);
 
-        // línea final
+        // Final
         resultado += fraseFinal(primerAnimal);
 
         return resultado;
