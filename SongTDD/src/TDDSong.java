@@ -29,6 +29,10 @@ public class TDDSong {
         if (animal.equals("bird")) {
             return "How absurd to swallow a bird.\n";
         }
+        if (animal.equals("spider")) {
+            return "How absurd to swallow a spider.\n";
+        }
+
         return "";
     }
 
@@ -59,11 +63,7 @@ public class TDDSong {
         String resultado = "";
 
         // Línea inicial
-        if (anteriores.isEmpty()) {
-            resultado += fraseInicial(animal) + ".\n";
-        } else {
-            resultado += fraseInicial(animal) + ".\n";
-        }
+        resultado += fraseInicial(animal) + ".\n";
 
         // Primera estrofa
         if (anteriores.isEmpty()) {
@@ -71,14 +71,21 @@ public class TDDSong {
             return resultado;
         }
 
-        // Frase especial del animal actual (solo fly o bird)
-        if (animal.equals("fly") || animal.equals("bird")) {
-            resultado += fraseEspecial(animal);
-        }
-
-        // Frase especial del fly si el anterior inmediato es fly
-        if (!anteriores.isEmpty() && anteriores.get(anteriores.size() - 1).equals("fly") && !animal.equals("fly")) {
+        // frases especiales por animales según los tests
+        if (animal.equals("bird")) {
+            // bird siempre tiene su frase
+            resultado += fraseEspecial("bird");
+        } else if (animal.equals("fly")) {
+            // fly solo tiene frase si no es el primero
             resultado += fraseEspecial("fly");
+        } else if (animal.equals("spider")) {
+            if (primerAnimal.equals("bird")) {
+                // caso bird, fly, spider. spider usa su propia frase
+                resultado += fraseEspecial("spider");
+            } else if (anteriores.contains("fly")) {
+                // casos fly, spider / fly, spider, bird.spider usa frase del fly
+                resultado += fraseEspecial("fly");
+            }
         }
 
         // Catch
