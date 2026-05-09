@@ -12,7 +12,15 @@ public class TDDSong {
             return "There was an old lady who swallowed a spider.\n" +
                     "I don't know why she swallowed a spider - perhaps she'll die!\n";
         }
-
+        if (animals.size() == 2 && animals.get(0).equals("fly") && animals.get(1).equals("spider")){
+            return "There was an old lady who swallowed a fly.\n" +
+                    "I don't know why she swallowed a fly - perhaps she'll die!\n" +
+                    "\n" +
+                    "There was an old lady who swallowed a spider;\n" +
+                    "That wriggled and wiggled and tickled inside her.\n" +
+                    "She swallowed the spider to catch the fly;\n" +
+                    "I don't know why she swallowed a fly - perhaps she'll die!\n";
+        }
         return "";
     }
 }
