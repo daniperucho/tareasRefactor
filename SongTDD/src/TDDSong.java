@@ -71,4 +71,16 @@ public class TDDSong {
         }
             return "";
     }
+
+    //metodo para sacar la frase diferente según el animal indicado
+    private String fraseEspecial(String animal) {
+        if (animal.equals("spider")) {
+            return "That wriggled and wiggled and tickled inside her.";
+        }
+        if (animal.equals("bird")) {
+            return "How absurd to swallow a bird.";
+        }
+
+        return "I don't know why she swallowed a " + animal + " - perhaps she'll die!";
+    }
 }
