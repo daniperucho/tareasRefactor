@@ -83,4 +83,14 @@ public class TDDSong {
 
         return "I don't know why she swallowed a " + animal + " - perhaps she'll die!";
     }
+
+    //metodo para la línea inicial común
+    private String fraseInicial(String animal) {
+        return "There was an old lady who swallowed a " + animal + ".\n"
+    }
+
+    //metodo para la linea final comun
+    private String fraseFinal() {
+        return "I don't know why she swallowed a fly - perhaps she'll die!\n";
+    }
 }
